@@ -17,7 +17,8 @@ function App() {
 }
 function Toggle() {
     const { auth, toggle: authToggle } = useContext(AuthContext);
-    const { toggle } = ThemeContext;
+    const { toggle } = useContext(ThemeContext);
+    
     return (
         <div>
             <input type="checkbox" name="themeToggle" onClick={toggle} />
