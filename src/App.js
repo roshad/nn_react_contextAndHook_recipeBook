@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./App.css";
 import ThemeContextProvider, { ThemeContext } from "./context";
 import AuthContextProvider, { AuthContext } from "./authContext";
@@ -16,32 +16,15 @@ function App() {
     );
 }
 function Toggle() {
+    const { auth, toggle: authToggle } = useContext(AuthContext);
+    const { toggle } = ThemeContext;
     return (
-        <AuthContext.Consumer>
-            {contextAuth => (
-                <ThemeContext.Consumer>
-                    {context => {
-                        const { auth, toggle: authToggle } = contextAuth;
-                        const { toggle } = context;
-                        return (
-                            <div>
-                                <input
-                                    type="checkbox"
-                                    name="themeToggle"
-                                    onClick={toggle}
-                                />
-                                <label
-                                    onClick={authToggle}
-                                    htmlFor="themeToggle"
-                                >
-                                    {auth ? "in" : "out"}
-                                </label>
-                            </div>
-                        );
-                    }}
-                </ThemeContext.Consumer>
-            )}
-        </AuthContext.Consumer>
+        <div>
+            <input type="checkbox" name="themeToggle" onClick={toggle} />
+            <label onClick={authToggle} htmlFor="themeToggle">
+                {auth ? "in" : "out"}
+            </label>
+        </div>
     );
 }
 class Navbar extends React.Component {
@@ -62,18 +45,16 @@ class Navbar extends React.Component {
     }
 }
 
-class BookList extends React.Component {
-    static contextType = ThemeContext;
-    render() {
-        const { isLight, light, dark } = this.context;
-        const style = isLight ? light : dark;
-        return (
-            <ul className="booklist" style={{ ...style }}>
-                <li>book1</li>
-                <li>book2</li>
-                <li>book3</li>
-            </ul>
-        );
-    }
+function BookList() {
+    const { isLight, light, dark } = useContext(ThemeContext);
+    const style = isLight ? light : dark;
+    return (
+        <ul className="booklist" style={{ ...style }}>
+            <li>book1</li>
+            <li>book2</li>
+            <li>book3</li>
+        </ul>
+    );
 }
+
 export default App;
