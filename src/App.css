@@ -1,8 +1,16 @@
 .App {
-  text-align: center;
-  margin:30px auto;
+    text-align: center;
+    margin:auto;
+    max-width: 40vw;
 }
-.Navbar li{
-  display:inline;
-  margin:auto 1rem;
+ul {
+    padding: 0;
+}
+.Navbar li {
+    display: inline;
+    margin: auto 1rem;
+}
+.booklist li {
+    list-style-type: none;
+    margin: 1rem;
 }
