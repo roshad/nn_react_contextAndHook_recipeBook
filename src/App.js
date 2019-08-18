@@ -2,13 +2,16 @@ import React, { useContext } from "react";
 import "./App.css";
 import ThemeContextProvider, { ThemeContext } from "./context";
 import AuthContextProvider, { AuthContext } from "./authContext";
+import BookListContextProvider, { BookListContext } from "./bookListContext";
 function App() {
     return (
         <div className="App">
             <AuthContextProvider>
                 <ThemeContextProvider>
                     <Navbar />
+                    <BookListContextProvider>
                     <BookList />
+                    </BookListContextProvider>
                     <Toggle />
                 </ThemeContextProvider>
             </AuthContextProvider>
@@ -48,14 +51,15 @@ class Navbar extends React.Component {
 
 function BookList() {
     const { isLight, light, dark } = useContext(ThemeContext);
+    const {booklist}= useContext(BookListContext)
+    console.log(useContext(BookListContext))
     const style = isLight ? light : dark;
     return (
         <ul className="booklist" style={{ ...style }}>
-            <li>book1</li>
-            <li>book2</li>
-            <li>book3</li>
+            {booklist.map(obj=><li>{obj.title}</li>)}
         </ul>
     );
 }
+
 
 export default App;
