@@ -52,7 +52,7 @@ class Navbar extends React.Component {
 function BookList() {
     const { isLight, light, dark } = useContext(ThemeContext);
     const {booklist}= useContext(BookListContext)
-    console.log(useContext(BookListContext))
+    
     const style = isLight ? light : dark;
     return (
         <ul className="booklist" style={{ ...style }}>
